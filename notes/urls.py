@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from base.views import home
-from create.views import create
+from create.views import create_note, create_category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('create', create, name = 'create')
+    path('create_note', create_note, name = 'create_note'),
+    path('create_category', create_category, name = 'create_category')
 ]

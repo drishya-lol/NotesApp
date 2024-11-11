@@ -50,6 +50,7 @@
                       <th>Name</th>
                       <th>Description</th>
                       <th>Category</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -59,6 +60,17 @@
                         <td>{{note.name}}</td>
                         <td>{{note.description}}</td>
                         <td>{{note.category.name}}</td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{note.id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                              Edit/Delete
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{note.id}}">
+                              <li><a class="dropdown-item" href="{% url 'edit_note' note.id %}">Edit</a></li>
+                              <li><a class="dropdown-item" href="{% url 'delete_note' note.id %}">Delete</a></li>
+                            </ul>
+                          </div>
+                        </td>
                       </tr>
                     {% endfor %}
                   </tbody>
@@ -74,6 +86,7 @@
                     <tr>
                       <th>Id</th>
                       <th>Name</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -81,6 +94,17 @@
                       <tr>
                         <th scope="row">{{category.id}}</th>
                         <td>{{category.name}}</td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{category.id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                              Edit/Delete
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{category.id}}">
+                              <li><a class="dropdown-item" href="{% url 'edit_category' category.id %}">Edit</a></li>
+                              <li><a class="dropdown-item" href="{% url 'delete_category' category.id %}">Delete</a></li>
+                            </ul>
+                          </div>
+                        </td>
                       </tr>
                     {% endfor %}
                   </tbody>

@@ -4,14 +4,20 @@ from .models import Note, NoteCategory
 from .forms import CreateNoteForm, CreateNoteCategoryForm, UserForm
 from  django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
-    notes_obj = Note.objects.all()
-    noteCategory_obj = NoteCategory.objects.all()
-    data = {'notes': notes_obj, 'noteCategories': noteCategory_obj}
-    return render(request, 'index.html', context=data)
+    if request.user.is_authenticated:
+        notes_obj = Note.objects.all()
+        noteCategory_obj = NoteCategory.objects.all()
+        query = request.GET.get('query')
+        if query:
+            notes_obj = notes_obj.filter(name__icontains=query)
+        data = {'notes': notes_obj, 'noteCategories': noteCategory_obj}
+        return render(request, 'index.html', context=data)
+    else:
+        return redirect('login')
 
 def createNote(request):
     if request.method == 'POST':
@@ -103,3 +109,7 @@ def user_login(request):
             return redirect('home')
     data = {'form': form}
     return render(request, 'login.html', context=data)
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')

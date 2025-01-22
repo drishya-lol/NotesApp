@@ -15,6 +15,12 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Categories</button>
     </li>
+    <li class="nav-item" role="presentation">
+      <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="nav-link" id="logout-btn">Logout</button>
+      </form>
+    </li>
   </ul>
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-notes-tab">
@@ -69,6 +75,7 @@
       </table>
       <button class="btn btn-primary"><a href="{% url 'createCategory'%}" style="text-decoration: none; color: white;">Create Category</a></button>
     </div>
+    <div class="tab-pane fade" id="pills-logout" role="tabpanel" aria-labelledby="pills-logout-tab">
   </div>
   <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
